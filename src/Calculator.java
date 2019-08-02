@@ -10,8 +10,8 @@ import java.util.Scanner;
 public class Calculator {
 
   static final double PIE_VALUE = 3.141592653589793;
-  static final double E_VALUE = 2.718281828459045;
-  static final String INVALID = "The input is invalid";
+  static final double E_VALUE = 2.718281828459045; //constant is never used
+  static final String INVALID = "The input is invalid"; //constant is never used
   static final String EXIT_WARN = "Please enter only 0(Continue) or 1(Exit) or 2(History)";
   static final String EXIT = "Do you want to exit?( 0 for Continue/1 for Exit/2 for History)";
   static final String ENTER = "Please Enter the value for gamma Function:";
