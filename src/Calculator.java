@@ -11,7 +11,9 @@ public class Calculator {
 
   static final double PIE_VALUE = 3.141592653589793;
   static final double E_VALUE = 2.718281828459045;
+  //constant is never used
   static final String INVALID = "The input is invalid";
+  //variable is never used, the user never make invalid input?
   static final String EXIT_WARN = "Please enter only 0(Continue) or 1(Exit) or 2(History)";
   static final String EXIT = "Do you want to exit?( 0 for Continue/1 for Exit/2 for History)";
   static final String ENTER = "Please Enter the value for gamma Function:";
@@ -31,14 +33,16 @@ public class Calculator {
     boolean close = false;
     int exit = 0;
     while (close == false && exit == 0) {
+      // close is always false?, isolate each condition within () ?
       System.out.println(Calculator.ENTER);
 
       boolean completed = false;
 
-      while (completed == false) {
+      while (completed == false) { // !completed?
         String presentString = "";
         String userInput = sc.nextLine();
         Double desiredInput = new Double(0);
+        // [1] could new Double(0) simply be replaced by = 0.0 ? seems redundant/deprecated
         desiredInput = Calculator.checkInput(userInput);
         if (desiredInput == null) {
           System.out.println(Calculator.CORRECT_FORMAT);
@@ -106,7 +110,7 @@ public class Calculator {
    * @return the user input to a desired form.
    */
   public static Double checkInput(String userInput) {
-    Double desiredInput = new Double(0);
+    Double desiredInput = new Double(0); // see comment [1]
     try {
       desiredInput = Double.valueOf(userInput);
     } catch (Exception e) {
@@ -134,6 +138,7 @@ public class Calculator {
         double inputValue = 0 - (userInput);
         if (inputValue % 1 != 0) {
           double gammaValue = Calculator.calculateNegativeGamma(inputValue);
+          // [2] two local variable declaration. single var initialization, with conditional val assignation ?
           // System.out.println("FROM PROGRAM "+gammaValue);
           return gammaValue;
         } else {
@@ -142,7 +147,7 @@ public class Calculator {
         }
 
       } else {
-        double gammaValue = Calculator.calculatePositiveGamma(userInput);
+        double gammaValue = Calculator.calculatePositiveGamma(userInput); // see comment [2]
         // System.out.println("FROM PROGRAM "+gammaValue);
         return gammaValue;
       }
@@ -167,7 +172,9 @@ public class Calculator {
     }
     double secondTerm = input;
     double partialThridTerm = Calculator.squareRoot((2 * Calculator.PIE_VALUE) / secondTerm);
+    //typo partialThirdTerm
     double thridTerm;
+    // typo thirdTerm
     if (partialThridTerm < 1) {
       thridTerm = Calculator.lnFirstCase(partialThridTerm);
     } else {
@@ -192,6 +199,7 @@ public class Calculator {
   public static double calculateNegativeGamma(double inputValue) {
     double denominatorSecond = Calculator.calculatePositiveGamma(inputValue);
     double sinToDegress = (Calculator.PIE_VALUE * inputValue) % (2 * Calculator.PIE_VALUE);
+    //typo sinToDegrees ?
     double denominator = denominatorSecond * inputValue * Calculator.sinValue(sinToDegress);
     double output = (-Calculator.PIE_VALUE) / denominator;
     return output;
@@ -324,6 +332,7 @@ public class Calculator {
    */
   public static double computeNewValue(double previousValue, double order, double numerator) {
     double newnumerator = previousValue * numerator;
+    //typo newNumerator ?
     double newValue = newnumerator / order;
     return newValue;
   }
@@ -360,10 +369,10 @@ public class Calculator {
       double newValue = Calculator.computeNewValue(oldValue, i, input);
       oldValue = newValue;
       if (i % 2 != 0) {
-        if (operator == true) {
+        if (operator == true) { // simplify to operator
           output = output + oldValue;
           operator = false;
-        } else if (operator == false) {
+        } else if (operator == false) { // simplify to !operator ?
           operator = true;
           output = output - oldValue;
         }
